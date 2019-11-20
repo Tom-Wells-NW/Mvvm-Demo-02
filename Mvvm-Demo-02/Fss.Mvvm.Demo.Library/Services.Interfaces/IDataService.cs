@@ -2,7 +2,7 @@
 
 namespace Fss.Mvvm.Demo.Library.Services.Interfaces
 {
-    public interface IDesignDataService
+    public interface IDataService
     {
         ITreeNode GetDefaultTreeNodeHierarchy();
     }

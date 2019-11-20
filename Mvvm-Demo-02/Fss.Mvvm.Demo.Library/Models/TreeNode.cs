@@ -10,6 +10,10 @@ namespace Fss.Mvvm.Demo.Library.Models
 {
     public class TreeNode : ObservableObject, ITreeNode
     {
+        public TreeNode()
+            : this(-1, "Root Node", TreeNodeType.Root, TreeNodeStatus.Unknown, new TreeNodeCollection())
+        { }
+
         public TreeNode(int id, string name, TreeNodeType treeNodeType)
             : this(id, name, treeNodeType, TreeNodeStatus.Unknown, new TreeNodeCollection())
         { }

@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace Fss.Mvvm.Demo.Library.Services
 {
-    public class DesignDataService : IDesignDataService
+    public class DesignDataService : IDataService
     {
-        private DesignDataHelper _designDataHelper;
+        private IDesignDataHelper _designDataHelper;
         private ITreeNodeFactory _treeNodeFactory;
+        private ITreeNodeCollectionFactory _treeNodeCollectionFactory;
 
-        public DesignDataService(DesignDataHelper designDataHelper, ITreeNodeFactory treeNodeFactory)
+        public DesignDataService(IDesignDataHelper designDataHelper, ITreeNodeFactory treeNodeFactory, ITreeNodeCollectionFactory treeNodeCollectionFactory)
         {
             _designDataHelper = designDataHelper;
             _treeNodeFactory = treeNodeFactory;
@@ -25,7 +26,13 @@ namespace Fss.Mvvm.Demo.Library.Services
         {
             var result = _treeNodeFactory.Create(-1, _designDataHelper.GetRootNodeName(), TreeNodeType.LogicalNetwork);
 
-            var rootDeviceNames = _designDataHelper.GetDefaultDeviceNames(100);
+            var deviceNames = _designDataHelper.GetDefaultDeviceNames(100);
+            var localDevices = _treeNodeCollectionFactory.Create();
+            foreach(var name in deviceNames)
+            {
+                localDevices.Add(_treeNodeFactory.Create(_designDataHelper.GetNextSequenceId(), name, TreeNodeType.NodeItem));
+            }
+
 
             return result;
         }

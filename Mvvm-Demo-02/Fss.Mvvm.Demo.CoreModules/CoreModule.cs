@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Fss.Mvvm.Demo.Library.Helpers;
 using Fss.Mvvm.Demo.Library.Models;
 using Fss.Mvvm.Demo.Library.Models.Interfaces;
 using Fss.Mvvm.Demo.Library.Services;
@@ -28,8 +29,12 @@ namespace Fss.Mvvm.Demo.CoreModules
 
             // Services
 
+            builder.RegisterType<DesignDataHelper>()
+                   .As<IDesignDataHelper>()
+                   .SingleInstance();
+
             builder.RegisterType<DesignDataService>()
-                   .As<IDesignDataService>()
+                   .As<IDataService>()
                    .SingleInstance();
 
             // Factories
